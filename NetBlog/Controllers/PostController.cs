@@ -109,7 +109,34 @@ namespace NetBlog.Controllers
             await _context.SaveChangesAsync();
 
             return Ok(post);
+
+
         }
-        
+
+        // DELETE Requests
+        [HttpDelete("{id}")]
+        public async Task<ActionResult<Post>> Delete(int id)
+        {
+            var post = await _context.Posts.FindAsync(id);
+            if (post == null)
+            {
+                return BadRequest("Post ID not found");
+            }
+
+            var user = await _context.Users.FindAsync(post.UserId);
+            if (user == null)
+            {
+                return BadRequest("User Id not found");
+            }
+
+            _context.Posts.Remove(post);
+            user.Posts.Remove(post);
+
+            await _context.SaveChangesAsync();
+            return Ok("Post Removed");
+        }
+
     }
+
+    
 }

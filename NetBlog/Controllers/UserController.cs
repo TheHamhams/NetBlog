@@ -46,7 +46,7 @@ namespace NetBlog.Controllers
         [HttpGet("{id}")]
         public async Task<ActionResult<User>> Get(int id)
         {
-            var user = await _context.Users.FindAsync(id);
+            var user = await _context.Users.Include(u => u.Posts).FirstOrDefaultAsync(u => u.Id == id);
             if (user == null)
             {
                 return BadRequest("User ID not found");
@@ -96,10 +96,12 @@ namespace NetBlog.Controllers
 
             string username = user.Username;
 
+            _context.Posts.RemoveRange(user.Posts);
             _context.Users.Remove(user);
+
             await _context.SaveChangesAsync();
 
-            return Ok($"{username} removed");
+            return Ok($"{username} and their posts removed");
         }
     }
 }
