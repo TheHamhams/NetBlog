@@ -7,57 +7,6 @@ namespace NetBlog.Controllers
     [ApiController]
     public class PostController : ControllerBase
     {
-        // Sample Data
-        public static List<User> _users = new List<User>
-        {
-            new User
-            {
-                Id= 1,
-                Username = "Hamhams",
-                FirstName = "Corey",
-                LastName = "Hamren",
-                Email = "Hamhams86@gmail.com",
-                Password = "Guest"
-            },
-            new User
-            {
-                Id= 2,
-                Username = "OtherDude928347",
-                FirstName = "Random",
-                LastName = "Gai",
-                Email = "FlavorTown@test.com",
-                Password = "Guest"
-            }
-        };
-
-        public static List<Post> _posts = new List<Post>
-        {
-            new Post
-            {
-                Id = 1,
-                Title = "Title 1",
-                Description = "Description 1",
-                UserId = 1,
-                Created = DateTime.Now
-            },
-            new Post 
-            {
-                Id = 2,
-                Title = "Title 2",
-                Description = "Description 2",
-                UserId = 2,
-                Created = DateTime.Now
-            },
-            new Post
-            {
-                Id = 3,
-                Title = "Title 3",
-                Description = "Description 3",
-                UserId = 1,
-                Created = DateTime.Now
-            },
-        };
-
         private readonly DataContext _context;
 
         public PostController(DataContext context)
@@ -135,8 +84,5 @@ namespace NetBlog.Controllers
             await _context.SaveChangesAsync();
             return Ok("Post Removed");
         }
-
     }
-
-    
 }

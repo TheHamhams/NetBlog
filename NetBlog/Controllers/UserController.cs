@@ -7,28 +7,6 @@ namespace NetBlog.Controllers
     [ApiController]
     public class UserController : ControllerBase
     {
-        public static List<User> _users = new List<User>
-        {
-            new User
-            {
-                Id= 1,
-                Username = "Hamhams",
-                FirstName = "Corey",
-                LastName = "Hamren",
-                Email = "Hamhams86@gmail.com",
-                Password = "Guest"
-            },
-            new User
-            {
-                Id= 2,
-                Username = "OtherDude928347",
-                FirstName = "Random",
-                LastName = "Gai",
-                Email = "FlavorTown@test.com",
-                Password = "Guest"
-            }
-        };
-
         private readonly DataContext _context;
 
         public UserController(DataContext context)
